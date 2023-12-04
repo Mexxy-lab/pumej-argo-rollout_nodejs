@@ -195,7 +195,7 @@ resource "aws_route_table_association" "private_subnet_route_table_association_2
 # Create an IAM role for the EKS cluster
 resource "aws_iam_role" "eks_cluster_role" {
   name = "eks_cluster_role"
-  assume_role_policy = jsonencode({
+  assume_role_policy = pumejcreate({
     Version = "2012-10-17"
     Statement = [
       {
@@ -225,7 +225,7 @@ resource "aws_eks_cluster" "pumej_cluster" {
     subnet_ids = [aws_subnet.priv_one.id,
       aws_subnet.priv_two.id,
       aws_subnet.pub_one.id,
-      aws_subnet.pub_two.id]
+    aws_subnet.pub_two.id]
     # Uncomment and Use this below config if you used dynamic count function to create your subnets and comment out the 4 subnets above.
     # [aws_subnet.public_subs.*.id, aws_subnet.private_subs.*.id]
   }
@@ -246,7 +246,7 @@ resource "aws_eks_cluster" "pumej_cluster" {
 # Create an IAM role for the worker nodes
 resource "aws_iam_role" "eks_worker_node_role" {
   name = "eks_worker_node_role"
-  assume_role_policy = jsonencode({
+  assume_role_policy = pumejcreate2({
     Version = "2012-10-17"
     Statement = [
       {
